@@ -1,0 +1,46 @@
+/*
+给定一个数组和滑动窗口的大小，找出所有滑动窗口里数值的最大值。
+例如，如果输入数组{2,3,4,2,6,2,5,1}及滑动窗口的大小3，
+那么一共存在6个滑动窗口，他们的最大值分别为{4,4,6,6,6,5}； 
+针对数组{2,3,4,2,6,2,5,1}的滑动窗口有以下6个： 
+{[2,3,4],2,6,2,5,1}， 
+{2,[3,4,2],6,2,5,1}， 
+{2,3,[4,2,6],2,5,1}， 
+{2,3,4,[2,6,2],5,1}， 
+{2,3,4,2,[6,2,5],1}， 
+{2,3,4,2,6,[2,5,1]}。
+
+我们采用最大堆的思想来解决问题，
+数据存放在vector<int>num中，窗口的大小是size,
+我们建立一个堆priority_queue<Pair > Q;
+在这里注意堆中的数据元素，我们采用的是pair<int,int>格式，
+第一个int值表示数值，第二个int值表示该数值的索引，
+我们沿着数组元素开始滑动，每次把一个新的数值放入堆中，
+放入后要判断一个堆中最大的数值索引，如果最大值索引不在窗口范围内则删除这个元素，
+如果索引满足要求，那么这个最大值就是该窗口的最大值，
+
+算法中的堆的容量是未知的，如果数组中数值的顺序是依次上升的，那么这个堆不会删除元素。
+
+*/
+
+typedef pair<int, int> Pair;
+vector<int> maxInWindows(const vector<int>& num, unsigned int size)
+{
+	vector<int> vres;
+	priority_queue<Pair> Q;
+	if (num.size() < size || size < 1) return vres;
+	for (int i = 0; i < size - 1; i++){
+		Q.push(Pair(num[i], i));
+	}
+	for (int i = size - 1; i < num.size(); i++){
+		Q.push(Pair(num[i], i));
+		Pair p = Q.top();
+
+		while (p.second < i + 1 - size){
+			Q.pop();
+			p = Q.top();
+		}
+		vres.push_back(p.first);
+	}
+	return vres;
+}
