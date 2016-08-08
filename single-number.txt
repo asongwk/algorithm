@@ -1,0 +1,17 @@
+/*
+Given an array of integers, every element appears twice except for one. Find that single one.
+Note:
+Your algorithm should have a linear runtime complexity. 
+Could you implement it without using extra memory?
+
+根据异或运算特点：
+两个相同的数进行异或，结果为0
+*/
+
+public static int singleNumber(int[] A) {
+    int num = 0;
+    for(int i=0;i<A.length;i++){
+        num^=A[i];
+    }
+    return num;
+}
