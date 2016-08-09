@@ -1,0 +1,83 @@
+Gas Station
+
+There are N gas stations along a circular route, where the amount of gas at station i is gas[i].
+
+You have a car with an unlimited gas tank and it costs cost[i] of gas to travel from station i to its next station (i+1). You begin the journey with an empty tank at one of the gas stations.
+
+Return the starting gas station's index if you can travel around the circuit once, otherwise return -1.
+
+题目的意思是，当我们驾驶一辆车，但是车厢里没油，我们可以依次通过各个加油站，并加油，但是每个加油站中的汽油是有限度的，当我们从一个加油站驶向另一个加油站的时候，车也会消耗一定的油量，
+我们的算法解决的问题就是找到一个加油站，从这个加油站出发，我们可以通过所有的加油站。
+
+简单的思路是该题目要计算 循环数组中的连续最大子序列和，但这里是返回该连续最大子序列和的起始位置，
+
+
+我写了两种算法，
+算法一:
+/*
+	diff数组存放gas-cost的值，
+	我们首先计算diff数组中的值是否可以满足整个旅途，如果不可以就返回-1，
+	然后我们依次计算每个加油站作为起始位置时，连续最大子序列和的起始位置，
+	
+*/
+
+int canCompleteCircuit(vector<int> &gas, vector<int> &cost) {
+	vector<int> diff;
+	int sum =0;
+	for(int i=0;i<gas.size();i++){
+		diff.push_back(gas[i]-cost[i]);
+		sum += diff[i];
+	}
+	if(sum < 0) return -1;
+	
+	sum =0;
+	int msum = 0;
+	int count = gas.size();
+	int start = 0;
+	int pos = 0;
+	for(int i=0;i<count;i++){
+		sum = 0;
+		for(int j=i;j<i+count;j++){
+		   
+			sum += diff[j%count];
+			 if(sum < 0){
+				start = (1+j)%count;
+				sum = 0;
+			}
+			if(sum >= msum ){
+				msum = sum;
+				pos = start;
+			}
+		}
+	}
+	return pos;
+}
+
+算法二：
+/*
+	算法中，因为我们已经计算出可以通过整个旅途，所以我们从首个大于等于0的数值开始计算和sum,如果累加的sum小于0，start的位置应该在小于0的这个位置后面，所以start = i+1;
+*/
+int canCompleteCircuit(vector<int> &gas, vector<int> &cost) {
+	vector<int> diff(gas.size());
+	int sum = 0;
+	for(int i=0;i<gas.size();i++){
+		diff[i] = gas[i] - cost[i];
+		sum += diff[i];
+	}
+	if(sum < 0) return -1;
+	
+	int start = 0;
+	int count = gas.size();
+	sum = 0;
+	for(int i=0;i<count;i++){
+		sum += diff[i];
+		if(sum < 0){
+			sum = 0;
+			start = i+1;
+		}
+	}
+	if(start >= count) return -1;
+	else return start;
+}
+
+
