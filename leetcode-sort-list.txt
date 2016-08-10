@@ -1,0 +1,113 @@
+题目要求
+Sort a linked list in O(n log n) time using constant space complexity.
+要求复杂度为O(n log n)，我们采用的是归并排序的思想，
+在对链表进行归并排序时，我们要找到链表的中点，采用快慢指针的方法进行查找，第一个指针每次走一步，第二个指针每次走两步，
+代码如下：
+(下面是完整的代码，可以直接在vs2013上运行，包括主函数中的测试数据)
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <queue>
+#include <stack>
+#include <algorithm>
+#include <ctime>
+#include <functional>
+
+using namespace std;
+
+struct ListNode
+{
+	int val;
+	ListNode *next; 
+	ListNode(int x)
+		:val(x), next(NULL)
+	{}
+};
+
+
+
+ListNode* sortList(ListNode *&head)
+{
+	if (head == NULL) return NULL;
+	if (head != NULL && head->next == NULL) return head;
+
+	ListNode *middle = head;
+	ListNode *tmp = head;
+	ListNode *pre = middle;
+	while(tmp != NULL && tmp->next != NULL){
+		pre = middle;
+		middle = middle->next;
+		tmp = tmp->next;
+		tmp = tmp->next;
+	}
+	pre->next = NULL;
+	ListNode * leftList = sortList(head);
+	ListNode * rightList = sortList(middle);
+	if (leftList->val > rightList->val){
+		head = rightList;
+		rightList = rightList->next;
+	}
+	else{
+		head = leftList;
+		leftList = leftList->next;
+	}
+	ListNode *p = head;
+	while (leftList!= NULL && rightList!= NULL){
+		if (leftList->val < rightList->val){
+			p->next = leftList;
+			leftList = leftList->next;
+			
+		}
+		else{
+			p->next = rightList;
+			rightList = rightList->next;
+		}
+		p = p->next;
+	}
+
+	if (leftList != NULL){
+		p->next = leftList;
+	}
+	else{
+		p->next = rightList;
+	}
+	return head;
+}
+
+
+void CreateList(ListNode *&head, int myints[],int n)
+{
+	head = new ListNode(myints[0]);
+	ListNode *p = head;
+	for (int i = 1; i < n;i++){
+		p->next = new ListNode(myints[i]);
+		p = p->next;
+	}
+}
+
+void ShowList(ListNode *head)
+{
+	ListNode *p = head;
+	while (p)
+	{
+		cout << p->val << " ";
+		p = p->next;
+	}
+	cout << endl;
+}
+
+int main()
+{
+	int myints[] = {23,45,2,5,83,21,10,11};
+	ListNode *head = NULL;
+	CreateList(head,myints,6);
+	ShowList(head);
+	sortList(head);
+
+	ShowList(head);
+
+
+	getchar();
+	return 0;
+}
