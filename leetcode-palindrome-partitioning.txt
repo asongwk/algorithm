@@ -1,0 +1,71 @@
+Given a string s, partition s such that every substring of the partition is a palindrome.
+Return all possible palindrome partitioning of s.
+For example, given s ="aab",
+Return
+  [
+    ["aa","b"],
+    ["a","a","b"]
+ 
+ ]
+
+题目的意思是把给定的字符串分割，分割的记过为每个子串都是回文字符串的形式。
+其中单个字符肯定是回文的形式.
+
+代码如下，参考网上代码
+
+class Solution {
+public:
+    bool IsPalindrome(string s)
+    {
+        if(s == "") return false;
+        if(1 == s.length() ) return true;
+        
+        int length = s.length();
+        int left = 0;
+        int right = length -1;
+        
+        while(left < right){
+            if(s[left] != s[right]){
+                return false;
+            }
+            left ++;
+            right --;
+        }
+        
+        return true;
+    }
+    
+    vector<vector<string> > m_rv;
+    vector<string> temp;
+    
+    void DFS(string s,int pos)
+    {
+        int length = s.length();
+        if(pos >= length){
+            if(temp.size() >0){
+                m_rv.push_back(temp);
+            }
+            return ;
+        }
+        
+        for(int i=pos+1;i<=length;i++){
+            string sub = s.substr(pos,i-pos);
+            if(IsPalindrome(sub)){
+                temp.push_back(sub);
+                DFS(s,i);
+                temp.pop_back();
+            }
+        }
+        
+        
+    }
+    
+    vector<vector<string>> partition(string s) 
+    {
+		DFS(s,0);        
+        return m_rv;
+    }
+    
+};
+
+
