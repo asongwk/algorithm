@@ -1,0 +1,68 @@
+题目描述：
+Given a binary tree, determine if it is height-balanced.
+For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1.
+
+我们要写代码实现判断是否是一棵二叉树
+以下思路来自网上http://www.cnblogs.com/chrischennx/p/4020722.html
+
+判断平衡二叉树，第一想法肯定是求出左右子树的深度，看是否相差大于1，但马上发现这是一个递归过程，每次递归返回的是深度，可是还得判断是否平衡，如果不平衡如何返回是否平衡，
+
+然后你可能会想到使用两个函数，一个函数用于递归求深度，一个函数用于递归求是否平衡，如下：
+
+public boolean isBalanced(TreeNode root) {
+    if(root==null) return true;
+    int l=depth(root.left);
+    int r=depth(root.right);
+    return ((int)Math.abs(l-r)<2)&&isBalanced(root.left) && isBalanced(root.right);
+}
+static int depth(TreeNode n){
+        if(n==null) return 0;
+        return Math.max(depth(n.left),depth(n.right))+1;
+   }
+
+再然后你会发现时间复杂度为O(n^2)，做了很多的无用功。
+
+要想降低时间复杂度，就得想一个办法让我们在递归求深度的同时判断是否是平衡二叉树，也就是还是得解决求深度的时候递归返回值的问题，在LeetCode中discuss了一下大笑，然后发现了大神们用了一个求深度时不可能出现的值轻松解决问题，关键代码如下：
+
+
+public final int UNB = -99;
+public int balanceJudge(TreeNode root){
+        if(root==null)return 0;
+        int l = balanceJudge(root.left);
+        int r = balanceJudge(root.right);
+        if(l==UNB || r== UNB || Math.abs(l-r)>1) return UNB;
+        return 1+(l>r?l:r);
+    }
+
+最后只需要判定返回值否为UNB就可以知道改二叉树是否平衡了。。
+
+给出完整的代码
+#include <iostream>  
+using namespace std;  
+struct TreeNode {  
+    int val;  
+    TreeNode *left;  
+    TreeNode *right;  
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}  
+};  
+class Solution {  
+public:  
+    bool isBalanced(TreeNode *root) {  
+        int height;  
+        return myBalance(root,height);  
+    }  
+    bool myBalance(TreeNode *root, int &height){//注意，将height用引用传进来  
+        if(root==NULL){//若为空，高度就为0，平衡  
+            height=0;  
+            return true;  
+        }  
+        int leftHeight;  
+        int rightHeight;  
+        bool leftBalance=myBalance(root->left,leftHeight);//root的左子树平衡吗？  
+        bool rightBalance=myBalance(root->right,rightHeight);//root的右子树平衡吗？  
+        height=max(leftHeight,rightHeight)+1;//以root为根的这棵树的高度，是root的左子树、右子树中的较高者加上root本身这个结点（即加1）  
+        if(leftBalance && rightBalance && abs(leftHeight-rightHeight)<=1)//如果左子树平衡，右子树平衡，并且左右子树高度差小于等于1  
+            return true;  
+        return false;  
+    }  
+};  
