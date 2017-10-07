@@ -5,3 +5,5 @@ int bit_cnt(int n)
 	for (; n; n &= n - 1, ++result);
 	return result;
 }
+//如果n是7，返回3
+//如果n是6，返回2
