@@ -4,8 +4,8 @@ Note:
 Your algorithm should have a linear runtime complexity. 
 Could you implement it without using extra memory?
 
-¸ù¾İÒì»òÔËËãÌØµã£º
-Á½¸öÏàÍ¬µÄÊı½øĞĞÒì»ò£¬½á¹ûÎª0
+æ ¹æ®å¼‚æˆ–è¿ç®—ç‰¹ç‚¹ï¼š
+ä¸¤ä¸ªç›¸åŒçš„æ•°è¿›è¡Œå¼‚æˆ–ï¼Œç»“æœä¸º0
 */
 
 public static int singleNumber(int[] A) {

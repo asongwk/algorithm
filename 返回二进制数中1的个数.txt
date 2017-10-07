@@ -1,0 +1,7 @@
+//返回整数n的二进制形式中1的个数
+int bit_cnt(int n)
+{
+	int result = 0;
+	for (; n; n &= n - 1, ++result);
+	return result;
+}

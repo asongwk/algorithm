@@ -3,22 +3,22 @@ Given a binary tree, determine if it is height-balanced.
 
 For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1.
 
-������
+分析：
 =======
-��Ŀ������
+题目描述：
 Given a binary tree, determine if it is height-balanced.
 For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1.
 
-����Ҫд����ʵ���ж��Ƿ���һ�ö�����
-����˼·��������http://www.cnblogs.com/chrischennx/p/4020722.html
+我们要写代码实现判断是否是一棵二叉树
+以下思路来自网上http://www.cnblogs.com/chrischennx/p/4020722.html
 
 >>>>>>> c2218685e866a7269e2eb7ef8491cf0d6caca771
-�ж�ƽ�����������һ�뷨�϶������������������ȣ����Ƿ�������1�������Ϸ�������һ���ݹ���̣�ÿ�εݹ鷵�ص�����ȣ����ǻ����ж��Ƿ�ƽ�⣬�����ƽ����η����Ƿ�ƽ�⣬
+判断平衡二叉树，第一想法肯定是求出左右子树的深度，看是否相差大于1，但马上发现这是一个递归过程，每次递归返回的是深度，可是还得判断是否平衡，如果不平衡如何返回是否平衡，
 
-Ȼ������ܻ��뵽ʹ������������һ���������ڵݹ�����ȣ�һ���������ڵݹ����Ƿ�ƽ�⣬���£�
+然后你可能会想到使用两个函数，一个函数用于递归求深度，一个函数用于递归求是否平衡，如下：
 
 <<<<<<< HEAD
-���ƴ���
+复制代码
 =======
 >>>>>>> c2218685e866a7269e2eb7ef8491cf0d6caca771
 public boolean isBalanced(TreeNode root) {
@@ -32,19 +32,19 @@ static int depth(TreeNode n){
         return Math.max(depth(n.left),depth(n.right))+1;
    }
 <<<<<<< HEAD
-���ƴ���
-��Ȼ����ᷢ��ʱ�临�Ӷ�ΪO(n^2)�����˺ܶ�����ù���
+复制代码
+再然后你会发现时间复杂度为O(n^2)，做了很多的无用功。
 
  
 
-Ҫ�뽵��ʱ�临�Ӷȣ��͵���һ���취�������ڵݹ�����ȵ�ͬʱ�ж��Ƿ���ƽ���������Ҳ���ǻ��ǵý������ȵ�ʱ��ݹ鷵��ֵ�����⣬��LeetCode��discuss��һ�´�Ц��Ȼ�����˴���������һ�������ʱ�����ܳ��ֵ�ֵ���ɽ�����⣬�ؼ��������£�
+要想降低时间复杂度，就得想一个办法让我们在递归求深度的同时判断是否是平衡二叉树，也就是还是得解决求深度的时候递归返回值的问题，在LeetCode中discuss了一下大笑，然后发现了大神们用了一个求深度时不可能出现的值轻松解决问题，关键代码如下：
 
-���ƴ���
+复制代码
 =======
 
-��Ȼ����ᷢ��ʱ�临�Ӷ�ΪO(n^2)�����˺ܶ�����ù���
+再然后你会发现时间复杂度为O(n^2)，做了很多的无用功。
 
-Ҫ�뽵��ʱ�临�Ӷȣ��͵���һ���취�������ڵݹ�����ȵ�ͬʱ�ж��Ƿ���ƽ���������Ҳ���ǻ��ǵý������ȵ�ʱ��ݹ鷵��ֵ�����⣬��LeetCode��discuss��һ�´�Ц��Ȼ�����˴���������һ�������ʱ�����ܳ��ֵ�ֵ���ɽ�����⣬�ؼ��������£�
+要想降低时间复杂度，就得想一个办法让我们在递归求深度的同时判断是否是平衡二叉树，也就是还是得解决求深度的时候递归返回值的问题，在LeetCode中discuss了一下大笑，然后发现了大神们用了一个求深度时不可能出现的值轻松解决问题，关键代码如下：
 
 
 >>>>>>> c2218685e866a7269e2eb7ef8491cf0d6caca771
@@ -57,13 +57,13 @@ public int balanceJudge(TreeNode root){
         return 1+(l>r?l:r);
     }
 <<<<<<< HEAD
-���ƴ���
-���ֻ��Ҫ�ж�����ֵ��ΪUNB�Ϳ���֪���Ķ������Ƿ�ƽ���ˡ���
+复制代码
+最后只需要判定返回值否为UNB就可以知道改二叉树是否平衡了。。
 =======
 
-���ֻ��Ҫ�ж�����ֵ��ΪUNB�Ϳ���֪���Ķ������Ƿ�ƽ���ˡ���
+最后只需要判定返回值否为UNB就可以知道改二叉树是否平衡了。。
 
-���������Ĵ���
+给出完整的代码
 >>>>>>> c2218685e866a7269e2eb7ef8491cf0d6caca771
 #include <iostream>  
 using namespace std;  
@@ -79,17 +79,17 @@ public:
         int height;  
         return myBalance(root,height);  
     }  
-    bool myBalance(TreeNode *root, int &height){//ע�⣬��height�����ô�����  
-        if(root==NULL){//��Ϊ�գ��߶Ⱦ�Ϊ0��ƽ��  
+    bool myBalance(TreeNode *root, int &height){//注意，将height用引用传进来  
+        if(root==NULL){//若为空，高度就为0，平衡  
             height=0;  
             return true;  
         }  
         int leftHeight;  
         int rightHeight;  
-        bool leftBalance=myBalance(root->left,leftHeight);//root��������ƽ����  
-        bool rightBalance=myBalance(root->right,rightHeight);//root��������ƽ����  
-        height=max(leftHeight,rightHeight)+1;//��rootΪ����������ĸ߶ȣ���root�����������������еĽϸ��߼���root���������㣨����1��  
-        if(leftBalance && rightBalance && abs(leftHeight-rightHeight)<=1)//���������ƽ�⣬������ƽ�⣬�������������߶Ȳ�С�ڵ���1  
+        bool leftBalance=myBalance(root->left,leftHeight);//root的左子树平衡吗？  
+        bool rightBalance=myBalance(root->right,rightHeight);//root的右子树平衡吗？  
+        height=max(leftHeight,rightHeight)+1;//以root为根的这棵树的高度，是root的左子树、右子树中的较高者加上root本身这个结点（即加1）  
+        if(leftBalance && rightBalance && abs(leftHeight-rightHeight)<=1)//如果左子树平衡，右子树平衡，并且左右子树高度差小于等于1  
             return true;  
         return false;  
     }  

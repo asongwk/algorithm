@@ -1,9 +1,9 @@
-��ĿҪ��
+题目要求
 Sort a linked list in O(n log n) time using constant space complexity.
-Ҫ���Ӷ�ΪO(n log n)�����ǲ��õ��ǹ鲢�����˼�룬
-�ڶ��������й鲢����ʱ������Ҫ�ҵ��������е㣬���ÿ���ָ��ķ������в��ң���һ��ָ��ÿ����һ�����ڶ���ָ��ÿ����������
-�������£�
-(�����������Ĵ��룬����ֱ����vs2013�����У������������еĲ�������)
+要求复杂度为O(n log n)，我们采用的是归并排序的思想，
+在对链表进行归并排序时，我们要找到链表的中点，采用快慢指针的方法进行查找，第一个指针每次走一步，第二个指针每次走两步，
+代码如下：
+(下面是完整的代码，可以直接在vs2013上运行，包括主函数中的测试数据)
 
 #include <iostream>
 #include <string>

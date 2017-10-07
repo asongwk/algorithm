@@ -6,7 +6,7 @@ For example,
 Given this linked list:1->2->3->4->5
 For k = 2, you should return:2->1->4->3->5
 For k = 3, you should return:3->2->1->4->5
-�����Ŀ����˼�Ƿ�ת�����е�ÿK��һ��Ľڵ㣬���K==2����ôÿ2���ڵ�Ԫ�ض�Ҫ��תһ�£�ֱ��������β���������K��Ԫ�أ��ͽ�����
+这个题目的意思是反转链表中的每K个一组的节点，如果K==2，那么每2个节点元素都要反转一下，直到链表结尾，如果不够K个元素，就结束。
 
 
 /**

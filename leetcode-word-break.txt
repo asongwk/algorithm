@@ -1,4 +1,4 @@
-ÌâÄ¿ÒªÇó£º
+é¢˜ç›®è¦æ±‚ï¼š
 
 Given a string s and a dictionary of words dict, determine if s can be segmented into a space-separated sequence of one or more dictionary words.
 For example, given
@@ -6,11 +6,11 @@ s ="leetcode",
 dict =["leet", "code"].
 Return true because"leetcode"can be segmented as"leet code".
 
-ÎÒÃÇ¿ÉÒÔ²ÉÓÃµİ¹éµÄ·½·¨Çó½â´úÂëÈçÏÂ£º
+æˆ‘ä»¬å¯ä»¥é‡‡ç”¨é€’å½’çš„æ–¹æ³•æ±‚è§£ä»£ç å¦‚ä¸‹ï¼š
 
 
-»¹¿ÉÒÔ²ÉÓÃ¶¯Ì¬¹æ»®µÄ·½Ê½Çó½â£º
-»­Ò»¸ö±í¸ñ¾ÍºÜºÃÀí½âÁË£¬±í¸ñµÄÃ¿Ò»¸öÎ»ÖÃµÄboolÖµ·Ö±ğ´ú±íÄÜ²»ÄÜ±»·Ö³Éword
+è¿˜å¯ä»¥é‡‡ç”¨åŠ¨æ€è§„åˆ’çš„æ–¹å¼æ±‚è§£ï¼š
+ç”»ä¸€ä¸ªè¡¨æ ¼å°±å¾ˆå¥½ç†è§£äº†ï¼Œè¡¨æ ¼çš„æ¯ä¸€ä¸ªä½ç½®çš„boolå€¼åˆ†åˆ«ä»£è¡¨èƒ½ä¸èƒ½è¢«åˆ†æˆword
 /*
 C++
 */

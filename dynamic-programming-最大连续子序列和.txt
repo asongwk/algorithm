@@ -11,10 +11,10 @@ using namespace std;
 
 
 /*
-������������к�
+最大连续子序列和
 */
 /*
-ö���㷨���г����еĿ������е�ͷ��β
+枚举算法，列出所有的可能序列的头和尾
 */
 int MaxSubSequence1(const int A[], int N)
 {
@@ -37,7 +37,7 @@ int MaxSubSequence1(const int A[], int N)
 }
 
 /*
-�򻯰��ö���㷨��������ǰ����Ĳ������еĺ�
+简化版的枚举算法，利用了前面求的部分序列的和
 */
 int MaxSubSequence2(const int A[], int N)
 {
@@ -56,7 +56,7 @@ int MaxSubSequence2(const int A[], int N)
 }
 
 /*
-��̬�滮�㷨
+动态规划算法
 */
 int MaxSubSequence3(const int A[],int N)
 {
@@ -72,13 +72,13 @@ int MaxSubSequence3(const int A[],int N)
 }
 
 /*
-���η�
-���ǰ��������д��м�ֳ��������֣�ǰ�벿�ֺͺ�벿�֣�
-������к������п��ܣ�max(maxleft,maxright,��maxleftsum + maxrightsum) ��;
-��ǰ�벿�֣��ں�벿�֣�ǰ���ֺͺ󲿷ֵ���ϣ�
-�������������һЩ������Ҫ�ֱ��������м������߿�ʼ���������ֵ��
-�����߽��������ֵ�Ͱ����߽���ұ����ֵ��
-����������µ�ֵ����������������к͡�
+分治法
+我们把数字序列从中间分成两个部分，前半部分和后半部分，
+最大序列和有三中可能，max(maxleft,maxright,（maxleftsum + maxrightsum) ）;
+在前半部分，在后半部分，前部分和后部分的组合，
+第三种情况复杂一些，我们要分别计算出从中间往两边开始的两个最大值，
+包括边界的左边最大值和包括边界的右边最大值，
+这三种情况下的值就是最大连续子序列和。
 */
 int MaxSubSum(const int A[],int begin,int end)
 {

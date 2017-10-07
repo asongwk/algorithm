@@ -6,18 +6,18 @@ You have a car with an unlimited gas tank and it costs cost[i] of gas to travel 
 
 Return the starting gas station's index if you can travel around the circuit once, otherwise return -1.
 
-ÌâÄ¿µÄÒâË¼ÊÇ£¬µ±ÎÒÃÇ¼ÝÊ»Ò»Á¾³µ£¬µ«ÊÇ³µÏáÀïÃ»ÓÍ£¬ÎÒÃÇ¿ÉÒÔÒÀ´ÎÍ¨¹ý¸÷¸ö¼ÓÓÍÕ¾£¬²¢¼ÓÓÍ£¬µ«ÊÇÃ¿¸ö¼ÓÓÍÕ¾ÖÐµÄÆûÓÍÊÇÓÐÏÞ¶ÈµÄ£¬µ±ÎÒÃÇ´ÓÒ»¸ö¼ÓÓÍÕ¾Ê»ÏòÁíÒ»¸ö¼ÓÓÍÕ¾µÄÊ±ºò£¬³µÒ²»áÏûºÄÒ»¶¨µÄÓÍÁ¿£¬
-ÎÒÃÇµÄËã·¨½â¾öµÄÎÊÌâ¾ÍÊÇÕÒµ½Ò»¸ö¼ÓÓÍÕ¾£¬´ÓÕâ¸ö¼ÓÓÍÕ¾³ö·¢£¬ÎÒÃÇ¿ÉÒÔÍ¨¹ýËùÓÐµÄ¼ÓÓÍÕ¾¡£
+é¢˜ç›®çš„æ„æ€æ˜¯ï¼Œå½“æˆ‘ä»¬é©¾é©¶ä¸€è¾†è½¦ï¼Œä½†æ˜¯è½¦åŽ¢é‡Œæ²¡æ²¹ï¼Œæˆ‘ä»¬å¯ä»¥ä¾æ¬¡é€šè¿‡å„ä¸ªåŠ æ²¹ç«™ï¼Œå¹¶åŠ æ²¹ï¼Œä½†æ˜¯æ¯ä¸ªåŠ æ²¹ç«™ä¸­çš„æ±½æ²¹æ˜¯æœ‰é™åº¦çš„ï¼Œå½“æˆ‘ä»¬ä»Žä¸€ä¸ªåŠ æ²¹ç«™é©¶å‘å¦ä¸€ä¸ªåŠ æ²¹ç«™çš„æ—¶å€™ï¼Œè½¦ä¹Ÿä¼šæ¶ˆè€—ä¸€å®šçš„æ²¹é‡ï¼Œ
+æˆ‘ä»¬çš„ç®—æ³•è§£å†³çš„é—®é¢˜å°±æ˜¯æ‰¾åˆ°ä¸€ä¸ªåŠ æ²¹ç«™ï¼Œä»Žè¿™ä¸ªåŠ æ²¹ç«™å‡ºå‘ï¼Œæˆ‘ä»¬å¯ä»¥é€šè¿‡æ‰€æœ‰çš„åŠ æ²¹ç«™ã€‚
 
-¼òµ¥µÄË¼Â·ÊÇ¸ÃÌâÄ¿Òª¼ÆËã Ñ­»·Êý×éÖÐµÄÁ¬Ðø×î´ó×ÓÐòÁÐºÍ£¬µ«ÕâÀïÊÇ·µ»Ø¸ÃÁ¬Ðø×î´ó×ÓÐòÁÐºÍµÄÆðÊ¼Î»ÖÃ£¬
+ç®€å•çš„æ€è·¯æ˜¯è¯¥é¢˜ç›®è¦è®¡ç®— å¾ªçŽ¯æ•°ç»„ä¸­çš„è¿žç»­æœ€å¤§å­åºåˆ—å’Œï¼Œä½†è¿™é‡Œæ˜¯è¿”å›žè¯¥è¿žç»­æœ€å¤§å­åºåˆ—å’Œçš„èµ·å§‹ä½ç½®ï¼Œ
 
 
-ÎÒÐ´ÁËÁ½ÖÖËã·¨£¬
-Ëã·¨Ò»:
+æˆ‘å†™äº†ä¸¤ç§ç®—æ³•ï¼Œ
+ç®—æ³•ä¸€:
 /*
-	diffÊý×é´æ·Ågas-costµÄÖµ£¬
-	ÎÒÃÇÊ×ÏÈ¼ÆËãdiffÊý×éÖÐµÄÖµÊÇ·ñ¿ÉÒÔÂú×ãÕû¸öÂÃÍ¾£¬Èç¹û²»¿ÉÒÔ¾Í·µ»Ø-1£¬
-	È»ºóÎÒÃÇÒÀ´Î¼ÆËãÃ¿¸ö¼ÓÓÍÕ¾×÷ÎªÆðÊ¼Î»ÖÃÊ±£¬Á¬Ðø×î´ó×ÓÐòÁÐºÍµÄÆðÊ¼Î»ÖÃ£¬
+	diffæ•°ç»„å­˜æ”¾gas-costçš„å€¼ï¼Œ
+	æˆ‘ä»¬é¦–å…ˆè®¡ç®—diffæ•°ç»„ä¸­çš„å€¼æ˜¯å¦å¯ä»¥æ»¡è¶³æ•´ä¸ªæ—…é€”ï¼Œå¦‚æžœä¸å¯ä»¥å°±è¿”å›ž-1ï¼Œ
+	ç„¶åŽæˆ‘ä»¬ä¾æ¬¡è®¡ç®—æ¯ä¸ªåŠ æ²¹ç«™ä½œä¸ºèµ·å§‹ä½ç½®æ—¶ï¼Œè¿žç»­æœ€å¤§å­åºåˆ—å’Œçš„èµ·å§‹ä½ç½®ï¼Œ
 	
 */
 
@@ -53,9 +53,9 @@ int canCompleteCircuit(vector<int> &gas, vector<int> &cost) {
 	return pos;
 }
 
-Ëã·¨¶þ£º
+ç®—æ³•äºŒï¼š
 /*
-	Ëã·¨ÖÐ£¬ÒòÎªÎÒÃÇÒÑ¾­¼ÆËã³ö¿ÉÒÔÍ¨¹ýÕû¸öÂÃÍ¾£¬ËùÒÔÎÒÃÇ´ÓÊ×¸ö´óÓÚµÈÓÚ0µÄÊýÖµ¿ªÊ¼¼ÆËãºÍsum,Èç¹ûÀÛ¼ÓµÄsumÐ¡ÓÚ0£¬startµÄÎ»ÖÃÓ¦¸ÃÔÚÐ¡ÓÚ0µÄÕâ¸öÎ»ÖÃºóÃæ£¬ËùÒÔstart = i+1;
+	ç®—æ³•ä¸­ï¼Œå› ä¸ºæˆ‘ä»¬å·²ç»è®¡ç®—å‡ºå¯ä»¥é€šè¿‡æ•´ä¸ªæ—…é€”ï¼Œæ‰€ä»¥æˆ‘ä»¬ä»Žé¦–ä¸ªå¤§äºŽç­‰äºŽ0çš„æ•°å€¼å¼€å§‹è®¡ç®—å’Œsum,å¦‚æžœç´¯åŠ çš„sumå°äºŽ0ï¼Œstartçš„ä½ç½®åº”è¯¥åœ¨å°äºŽ0çš„è¿™ä¸ªä½ç½®åŽé¢ï¼Œæ‰€ä»¥start = i+1;
 */
 int canCompleteCircuit(vector<int> &gas, vector<int> &cost) {
 	vector<int> diff(gas.size());
